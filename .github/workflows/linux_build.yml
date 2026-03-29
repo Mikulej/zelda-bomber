@@ -2,7 +2,7 @@ name: Linux Build
 run-name: ${{ github.actor }} is testing building for Linux
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Linux-Build:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python
