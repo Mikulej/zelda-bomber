@@ -15,10 +15,8 @@ def main():
     # pygame setup
     pygame.init()
     screen = pygame.display.set_mode((BASE_RESOLUTION_X, BASE_RESOLUTION_Y))
-    print(pygame.display.get_window_size())
-    src_width, src_height = pygame.display.get_window_size()
 
-    render_ratio = pygame.Vector2(src_width / BASE_RESOLUTION_X,src_height / BASE_RESOLUTION_Y)
+    render_ratio = pygame.Vector2(1,1)
 
     pygame.display.set_caption("Zelda Bomber")
     clock = pygame.time.Clock()
