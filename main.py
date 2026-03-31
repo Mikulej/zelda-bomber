@@ -1,17 +1,20 @@
 import pygame
 
+BASE_RESOLUTION_X = 1280 
+BASE_RESOLUTION_Y = 720
+
 def main():
 
     print("Hello World!")
 
     # pygame setup
     pygame.init()
-    screen = pygame.display.set_mode((1280, 720))
+    screen = pygame.display.set_mode((BASE_RESOLUTION_X, BASE_RESOLUTION_Y))
     print(pygame.display.get_window_size())
     src_width, src_height = pygame.display.get_window_size()
 
-    ratio_x = src_width / 1280
-    ratio_y = src_height / 720
+    ratio_x = src_width / BASE_RESOLUTION_X
+    ratio_y = src_height / BASE_RESOLUTION_Y
 
     pygame.display.set_caption("Zelda Bomber")
     clock = pygame.time.Clock()
@@ -51,16 +54,24 @@ def main():
             screen = pygame.display.set_mode((1920, 1080))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
-            ratio_x = src_width / 1280
-            ratio_y = src_height / 720
+            ratio_x = src_width / BASE_RESOLUTION_X
+            ratio_y = src_height / BASE_RESOLUTION_Y
             player_width = 20*ratio_x
             player_height = 20*ratio_y
         if keys[pygame.K_q]:
             screen = pygame.display.set_mode((1280, 720))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
-            ratio_x = src_width / 1280
-            ratio_y = src_height / 720
+            ratio_x = src_width / BASE_RESOLUTION_X
+            ratio_y = src_height / BASE_RESOLUTION_Y
+            player_width = 20*ratio_x
+            player_height = 20*ratio_y
+        if keys[pygame.K_r]:
+            screen = pygame.display.set_mode((800, 600))
+            src_width, src_height = pygame.display.get_window_size()
+            print(pygame.display.get_window_size())
+            ratio_x = src_width / BASE_RESOLUTION_X
+            ratio_y = src_height / BASE_RESOLUTION_Y
             player_width = 20*ratio_x
             player_height = 20*ratio_y
         # flip() the display to put your work on screen
