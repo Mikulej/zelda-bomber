@@ -13,17 +13,16 @@ def main():
     print(pygame.display.get_window_size())
     src_width, src_height = pygame.display.get_window_size()
 
-    ratio_x = src_width / BASE_RESOLUTION_X
-    ratio_y = src_height / BASE_RESOLUTION_Y
+    render_ratio = pygame.Vector2(src_width / BASE_RESOLUTION_X,src_height / BASE_RESOLUTION_Y)
 
     pygame.display.set_caption("Zelda Bomber")
     clock = pygame.time.Clock()
     running = True
     dt = 0
 
-    player_pos = pygame.Vector2(screen.get_width() / 2 / ratio_x, screen.get_height() / 2 / ratio_y)
-    player_width = 20*ratio_x
-    player_height = 20*ratio_y
+    player_pos = pygame.Vector2(screen.get_width() / 2 / render_ratio.x, screen.get_height() / 2 / render_ratio.y)
+    player_width = 20*render_ratio.x
+    player_height = 20*render_ratio.y
 
     while running:
         # poll for events
@@ -37,9 +36,9 @@ def main():
 
         # ---- Render ----
 
-        pygame.draw.circle(screen, "red", [player_pos.x*ratio_x,player_pos.y*ratio_y], 40)
+        pygame.draw.circle(screen, "red", [player_pos.x*render_ratio.x,player_pos.y*render_ratio.y], 40)
         
-        pygame.draw.rect(screen,"orange",rect=pygame.Rect(player_pos.x*ratio_x -(player_width/2),(player_pos.y*ratio_y-(player_height/2)),player_width,player_height))
+        pygame.draw.rect(screen,"orange",rect=pygame.Rect(player_pos.x*render_ratio.x -(player_width/2),(player_pos.y*render_ratio.y-(player_height/2)),player_width,player_height))
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
@@ -54,26 +53,26 @@ def main():
             screen = pygame.display.set_mode((1920, 1080))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
-            ratio_x = src_width / BASE_RESOLUTION_X
-            ratio_y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*ratio_x
-            player_height = 20*ratio_y
+            render_ratio.x = src_width / BASE_RESOLUTION_X
+            render_ratio.y = src_height / BASE_RESOLUTION_Y
+            player_width = 20*render_ratio.x
+            player_height = 20*render_ratio.y
         if keys[pygame.K_q]:
             screen = pygame.display.set_mode((1280, 720))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
-            ratio_x = src_width / BASE_RESOLUTION_X
-            ratio_y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*ratio_x
-            player_height = 20*ratio_y
+            render_ratio.x = src_width / BASE_RESOLUTION_X
+            render_ratio.y = src_height / BASE_RESOLUTION_Y
+            player_width = 20*render_ratio.x
+            player_height = 20*render_ratio.y
         if keys[pygame.K_r]:
             screen = pygame.display.set_mode((800, 600))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
-            ratio_x = src_width / BASE_RESOLUTION_X
-            ratio_y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*ratio_x
-            player_height = 20*ratio_y
+            render_ratio.x = src_width / BASE_RESOLUTION_X
+            render_ratio.y = src_height / BASE_RESOLUTION_Y
+            player_width = 20*render_ratio.x
+            player_height = 20*render_ratio.y
         # flip() the display to put your work on screen
         pygame.display.flip()
 
