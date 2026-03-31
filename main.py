@@ -21,8 +21,6 @@ def main():
     dt = 0
 
     player_pos = pygame.Vector2(screen.get_width() / 2 / render_ratio.x, screen.get_height() / 2 / render_ratio.y)
-    player_width = 20*render_ratio.x
-    player_height = 20*render_ratio.y
 
     while running:
         # poll for events
@@ -37,7 +35,8 @@ def main():
         # ---- Render ----
 
         pygame.draw.circle(screen, "red", [player_pos.x*render_ratio.x,player_pos.y*render_ratio.y], 40)
-        
+        player_width = 20*render_ratio.x
+        player_height = 20*render_ratio.y
         pygame.draw.rect(screen,"orange",rect=pygame.Rect(player_pos.x*render_ratio.x -(player_width/2),(player_pos.y*render_ratio.y-(player_height/2)),player_width,player_height))
 
         keys = pygame.key.get_pressed()
@@ -55,24 +54,18 @@ def main():
             print(pygame.display.get_window_size())
             render_ratio.x = src_width / BASE_RESOLUTION_X
             render_ratio.y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*render_ratio.x
-            player_height = 20*render_ratio.y
         if keys[pygame.K_q]:
             screen = pygame.display.set_mode((1280, 720))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
             render_ratio.x = src_width / BASE_RESOLUTION_X
             render_ratio.y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*render_ratio.x
-            player_height = 20*render_ratio.y
         if keys[pygame.K_r]:
             screen = pygame.display.set_mode((800, 600))
             src_width, src_height = pygame.display.get_window_size()
             print(pygame.display.get_window_size())
             render_ratio.x = src_width / BASE_RESOLUTION_X
             render_ratio.y = src_height / BASE_RESOLUTION_Y
-            player_width = 20*render_ratio.x
-            player_height = 20*render_ratio.y
         # flip() the display to put your work on screen
         pygame.display.flip()
 
