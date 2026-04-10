@@ -16,6 +16,7 @@ def main():
     dt = 0
 
     GameObject.initialize()
+    GameObject(100,100,50,50)
 
     player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
 
@@ -31,7 +32,7 @@ def main():
 
         # ---- Render ----
 
-       
+        GameObject.draw_all()
         pygame.draw.circle(Renderer.screen, "red", [player_pos.x*Renderer.ratio.x,player_pos.y*Renderer.ratio.y], 40)
         player_width = 20*Renderer.ratio.x
         player_height = 20*Renderer.ratio.y

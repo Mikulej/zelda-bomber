@@ -36,5 +36,14 @@ class GameObject():
 
 
     def draw(self):
-        pygame.draw.rect(Renderer.screen,"orange",rect=pygame.Rect(self.x*Renderer.ratio.x,self.y*Renderer.ratio.y,self.width,self.height))
+        pygame.draw.rect(Renderer.screen,"orange",
+                         rect=pygame.Rect(self.x*Renderer.ratio.x,
+                                          self.y*Renderer.ratio.y,
+                                          self.width*Renderer.ratio.x,
+                                          self.height*Renderer.ratio.y))
+
+    def draw_all():
+        for go in GameObject.game_object_list:
+            if go.id != -1:
+                go.draw()
 
