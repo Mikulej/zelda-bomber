@@ -23,6 +23,7 @@ def main():
     GameObject(100,100,50,50)
     GameObject(200,100,50,50,"blue")
 
+    cursor = GameObject(0,0,20,20, (0,0,0,100))
 
     player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
 
@@ -33,8 +34,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        
         # fill the screen with a color to wipe away anything from last frame
         Renderer.screen.fill("lightblue")
+
+        mouse = pygame.Vector2(pygame.mouse.get_pos())
 
         # ---- Render ----
 
@@ -43,6 +47,10 @@ def main():
         player_width = 20*Renderer.ratio.x
         player_height = 20*Renderer.ratio.y
         pygame.draw.rect(Renderer.screen,"orange",rect=pygame.Rect(player_pos.x*Renderer.ratio.x -(player_width/2),(player_pos.y*Renderer.ratio.y-(player_height/2)),player_width,player_height))
+        
+        # Render grid cursor
+        if mouse.x >= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x - (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) and mouse.x <= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x + (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) - cursor.width * Renderer.ratio.x:
+            cursor.x, cursor.y = int(mouse.x / Renderer.ratio.x / cursor.width) * cursor.width, int(mouse.y / Renderer.ratio.y / cursor.height) * cursor.height
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
@@ -58,7 +66,7 @@ def main():
         if keys[pygame.K_2]:
             Renderer.changeResolution(1280,720)
         if keys[pygame.K_3]:
-            Renderer.changeResolution(800,600)
+            Renderer.changeResolution(640,360)
 
         # flip() the display to put your work on screen
         pygame.display.flip()
