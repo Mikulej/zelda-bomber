@@ -6,12 +6,13 @@ GAME_OBJECT_LIMIT = 100
 class GameObject():
     initialized = False
     game_object_list = [] 
-    def __init__(self,x: float,y: float , width: float, height: float):
+    def __init__(self,x: float,y: float , width: float, height: float, color: pygame.Color = (255,255,255)):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.id = -1
+        self.color = color
 
         if GameObject.initialized == False:
             return
@@ -36,7 +37,7 @@ class GameObject():
 
 
     def draw(self):
-        pygame.draw.rect(Renderer.screen,"orange",
+        pygame.draw.rect(Renderer.screen, self.color,
                          rect=pygame.Rect(self.x*Renderer.ratio.x,
                                           self.y*Renderer.ratio.y,
                                           self.width*Renderer.ratio.x,

@@ -17,6 +17,8 @@ def main():
 
     GameObject.initialize()
     GameObject(100,100,50,50)
+    GameObject(200,100,50,50,"blue")
+
 
     player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
 
