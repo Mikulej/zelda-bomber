@@ -53,11 +53,11 @@ def main():
             player_pos.x -= 300 * dt
         if keys[pygame.K_d]:
             player_pos.x += 300 * dt
-        if keys[pygame.K_e]:
+        if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
-        if keys[pygame.K_q]:
+        if keys[pygame.K_2]:
             Renderer.changeResolution(1280,720)
-        if keys[pygame.K_r]:
+        if keys[pygame.K_3]:
             Renderer.changeResolution(800,600)
 
         # flip() the display to put your work on screen
