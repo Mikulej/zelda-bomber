@@ -1,4 +1,5 @@
 import pygame
+from render import Renderer
 
 GAME_OBJECT_LIMIT = 100
 
@@ -30,10 +31,10 @@ class GameObject():
             go = GameObject(0,0,0,0)
             go.id = -1
             GameObject.game_object_list.append(go)
-            
+
         GameObject.initialized = True
 
 
     def draw(self):
-        # if -1 -> dont draw
-        pass
+        pygame.draw.rect(Renderer.screen,"orange",rect=pygame.Rect(self.x*Renderer.ratio.x,self.y*Renderer.ratio.y,self.width,self.height))
+
