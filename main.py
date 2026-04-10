@@ -16,6 +16,10 @@ def main():
     dt = 0
 
     GameObject.initialize()
+
+    # Playable/walkable area
+    plane = GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
+    
     GameObject(100,100,50,50)
     GameObject(200,100,50,50,"blue")
 
