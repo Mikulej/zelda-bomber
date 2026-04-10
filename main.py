@@ -1,4 +1,5 @@
 import pygame
+from game_object import GameObject
 
 BASE_RESOLUTION_X = 1280 
 BASE_RESOLUTION_Y = 720
@@ -23,6 +24,8 @@ def main():
     running = True
     dt = 0
 
+    GameObject.initialize()
+
     player_pos = pygame.Vector2(screen.get_width() / 2 / render_ratio.x, screen.get_height() / 2 / render_ratio.y)
 
     while running:
@@ -37,6 +40,7 @@ def main():
 
         # ---- Render ----
 
+       
         pygame.draw.circle(screen, "red", [player_pos.x*render_ratio.x,player_pos.y*render_ratio.y], 40)
         player_width = 20*render_ratio.x
         player_height = 20*render_ratio.y
