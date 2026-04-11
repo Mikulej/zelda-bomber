@@ -6,6 +6,7 @@ on:
             - '*.py'
 jobs:
   mypy:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python

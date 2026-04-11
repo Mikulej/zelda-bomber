@@ -8,7 +8,7 @@ def main():
     # pygame setup
     pygame.init()
 
-    print("test")
+    print("test2")
 
     pygame.display.set_caption("Zelda Bomber")
     clock = pygame.time.Clock()
