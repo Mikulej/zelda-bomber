@@ -31,6 +31,6 @@ jobs:
       - name: Check File Existence
         uses: thebinaryfelix/check-file-existence-action@2.0.0
         with:
-          files: 'dist/main/main, dist/main/_internal'
+          files: 'dist/main/main.exe, dist/main/_internal'
 
       - run: echo "Job status ${{ job.status }}."
