@@ -5,8 +5,6 @@ from render import Renderer
 
 def main():
 
-    print("Hello World!")
-
     # pygame setup
     pygame.init()
 
