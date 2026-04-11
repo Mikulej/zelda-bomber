@@ -1,9 +1,9 @@
 name: Pylint
 
 on:
-    push:
-        paths:
-            - '*.py'
+  pull_request:
+    paths:
+      - '*.py'
 
 jobs:
   static-analysis:
@@ -34,4 +34,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint -E $(git ls-files '*.py')
+        pylint --unsafe-load-any-extension y -E $(git ls-files '*.py')
