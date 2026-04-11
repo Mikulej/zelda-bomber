@@ -8,6 +8,8 @@ def main():
     # pygame setup
     pygame.init()
 
+    print("test")
+
     pygame.display.set_caption("Zelda Bomber")
     clock = pygame.time.Clock()
     running = True
