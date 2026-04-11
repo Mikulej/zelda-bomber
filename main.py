@@ -4,7 +4,7 @@ from render import Renderer
 
 
 def main():
-    print("test")
+
     # pygame setup
     pygame.init()
 
