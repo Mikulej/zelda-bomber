@@ -29,8 +29,13 @@ jobs:
         run: pyinstaller main.py
 
       - name: Check File Existence
+        id: check_files
         uses: thebinaryfelix/check-file-existence-action@2.0.0
         with:
           files: 'dist/main/main.exe, dist/main/_internal'
+
+      - name: Files exist
+        if: steps.check_files.outputs.exists == 'false'
+        run: exit 1
 
       - run: echo "Job status ${{ job.status }}."
