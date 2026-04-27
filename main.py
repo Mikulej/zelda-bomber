@@ -1,6 +1,7 @@
 import pygame
 from game_object import GameObject
 from render import Renderer
+from collider import Collider
 
 
 def main():
@@ -22,6 +23,8 @@ def main():
     
     GameObject(100,100,50,50)
     GameObject(200,100,50,50,"blue")
+
+    Collider(300,100,50,50,"orange")
 
     cursor = GameObject(0,0,20,20, (0,0,0,100))
 
