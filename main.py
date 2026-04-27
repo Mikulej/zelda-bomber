@@ -27,6 +27,8 @@ def main():
 
     player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
 
+    oldMousePressed = False
+
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
@@ -67,6 +69,11 @@ def main():
             Renderer.changeResolution(1280,720)
         if keys[pygame.K_3]:
             Renderer.changeResolution(640,360)
+
+        mousePressed = pygame.mouse.get_pressed()[0]
+        if mousePressed == True and oldMousePressed == False:
+            GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
+        oldMousePressed = mousePressed
 
         # flip() the display to put your work on screen
         pygame.display.flip()
