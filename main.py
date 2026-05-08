@@ -1,6 +1,7 @@
 import pygame
 from game_object import GameObject
 from render import Renderer
+from collider import Collider
 
 
 def main():
@@ -21,11 +22,24 @@ def main():
     plane = GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
     
     GameObject(100,100,50,50)
-    GameObject(200,100,50,50,"blue")
+    GameObject(200,200,50,50,"blue")
+
+    Collider(300,100,50,50,"brown")
+    Collider(500,100,50,50,"brown")
+    Collider(400,100,50,50,"brown")
+    Collider(600,100,50,50,"brown")
+    Collider(800,100,50,50,"brown")
+    Collider(800,200,50,50,"brown")
+    Collider(800,300,50,50,"green")
+    Collider(800,350,50,50,"yellow")
+    Collider(800,400,50,50,"red")
+    Collider(700,300,50,150,"purple")
+
+    player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
 
     cursor = GameObject(0,0,20,20, (0,0,0,100))
 
-    player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
+    oldMousePressed = False
 
     while running:
         # poll for events
@@ -43,10 +57,6 @@ def main():
         # ---- Render ----
 
         GameObject.draw_all()
-        pygame.draw.circle(Renderer.screen, "red", [player_pos.x*Renderer.ratio.x,player_pos.y*Renderer.ratio.y], 40)
-        player_width = 20*Renderer.ratio.x
-        player_height = 20*Renderer.ratio.y
-        pygame.draw.rect(Renderer.screen,"orange",rect=pygame.Rect(player_pos.x*Renderer.ratio.x -(player_width/2),(player_pos.y*Renderer.ratio.y-(player_height/2)),player_width,player_height))
         
         # Render grid cursor
         if mouse.x >= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x - (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) and mouse.x <= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x + (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) - cursor.width * Renderer.ratio.x:
@@ -54,19 +64,24 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            player_pos.y -= 300 * dt
+            _, player.y = Collider.move(player,0,-300 * dt)
         if keys[pygame.K_s]:
-            player_pos.y += 300 * dt
+            _, player.y = Collider.move(player,0,300 * dt)
         if keys[pygame.K_a]:
-            player_pos.x -= 300 * dt
+            player.x, _ = Collider.move(player,-300 * dt,0)
         if keys[pygame.K_d]:
-            player_pos.x += 300 * dt
+            player.x, _ = Collider.move(player,300 * dt,0)
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
         if keys[pygame.K_2]:
             Renderer.changeResolution(1280,720)
         if keys[pygame.K_3]:
             Renderer.changeResolution(640,360)
+
+        mousePressed = pygame.mouse.get_pressed()[0]
+        if mousePressed == True and oldMousePressed == False:
+            GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
+        oldMousePressed = mousePressed
 
         # flip() the display to put your work on screen
         pygame.display.flip()

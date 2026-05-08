@@ -31,6 +31,7 @@ class GameObject():
     def __del__(self):
         GameObject.game_object_list[self.id].id = -1
 
+    @staticmethod
     def initialize():
         for i in range(0,GAME_OBJECT_LIMIT):
             go = GameObject(0,0,0,0)
@@ -53,7 +54,8 @@ class GameObject():
                                           self.y*Renderer.ratio.y - (self.height*Renderer.ratio.y/2),
                                           self.width*Renderer.ratio.x,
                                           self.height*Renderer.ratio.y))
-
+        
+    @staticmethod
     def draw_all():
         for go in GameObject.game_object_list:
             if go.id != -1:
