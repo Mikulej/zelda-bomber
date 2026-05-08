@@ -14,6 +14,7 @@ class Collider(GameObject):
     super().__del__()
     Collider.collider_id_list.remove(self.id)
 
+  @staticmethod
   def move(go: GameObject,dx: float, dy: float) -> tuple[float, float]:
       skip_id = go.id
       next_pos_x = go.x + dx
