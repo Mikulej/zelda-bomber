@@ -6,8 +6,6 @@ from collider import Collider
 
 def main():
 
-    print("Hello World!")
-
     # pygame setup
     pygame.init()
 
