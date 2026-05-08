@@ -26,9 +26,9 @@ def main():
 
     Collider(300,100,50,50,"orange")
 
-    cursor = GameObject(0,0,20,20, (0,0,0,100))
+    player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
 
-    player_pos = pygame.Vector2(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y)
+    cursor = GameObject(0,0,20,20, (0,0,0,100))
 
     oldMousePressed = False
 
@@ -48,10 +48,6 @@ def main():
         # ---- Render ----
 
         GameObject.draw_all()
-        pygame.draw.circle(Renderer.screen, "red", [player_pos.x*Renderer.ratio.x,player_pos.y*Renderer.ratio.y], 40)
-        player_width = 20*Renderer.ratio.x
-        player_height = 20*Renderer.ratio.y
-        pygame.draw.rect(Renderer.screen,"orange",rect=pygame.Rect(player_pos.x*Renderer.ratio.x -(player_width/2),(player_pos.y*Renderer.ratio.y-(player_height/2)),player_width,player_height))
         
         # Render grid cursor
         if mouse.x >= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x - (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) and mouse.x <= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x + (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) - cursor.width * Renderer.ratio.x:
@@ -59,13 +55,13 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            player_pos.y -= 300 * dt
+            player.y -= 300 * dt
         if keys[pygame.K_s]:
-            player_pos.y += 300 * dt
+            player.y += 300 * dt
         if keys[pygame.K_a]:
-            player_pos.x -= 300 * dt
+            player.x -= 300 * dt
         if keys[pygame.K_d]:
-            player_pos.x += 300 * dt
+            player.x += 300 * dt
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
         if keys[pygame.K_2]:
