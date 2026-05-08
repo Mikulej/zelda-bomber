@@ -22,9 +22,18 @@ def main():
     plane = GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
     
     GameObject(100,100,50,50)
-    GameObject(200,100,50,50,"blue")
+    GameObject(200,200,50,50,"blue")
 
-    Collider(300,100,50,50,"orange")
+    Collider(300,100,50,50,"red")
+    Collider(500,100,50,50,"blue")
+    Collider(400,100,50,50,"red")
+    Collider(600,100,50,50,"red")
+    Collider(800,100,50,50,"purple")
+    Collider(800,200,50,50,"purple")
+    Collider(800,300,50,50,"purple")
+    Collider(800,350,50,50,"purple")
+    Collider(800,400,50,50,"purple")
+    Collider(700,300,50,150,"purple")
 
     player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
 
@@ -55,13 +64,13 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            player.y -= 300 * dt
+            _, player.y = Collider.move(player,0,-300 * dt)
         if keys[pygame.K_s]:
-            player.y += 300 * dt
+            _, player.y = Collider.move(player,0,300 * dt)
         if keys[pygame.K_a]:
-            player.x -= 300 * dt
+            player.x, _ = Collider.move(player,-300 * dt,0)
         if keys[pygame.K_d]:
-            player.x += 300 * dt
+            player.x, _ = Collider.move(player,300 * dt,0)
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
         if keys[pygame.K_2]:
