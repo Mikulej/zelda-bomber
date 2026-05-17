@@ -69,6 +69,7 @@ class GameObject():
         data["height"] = self.height
         data["color"] = self.color
         data["center"] = False if self.draw_function == GameObject.draw else True
+        data["id"] = self.id
         return data
     
     @staticmethod
@@ -87,6 +88,6 @@ class GameObject():
     
     @staticmethod
     def deserialize_all(data: dict):
-        for go in data:
-            GameObject.deserialize(data[go])
+        for index in data:
+            GameObject.deserialize(data[index])
             
