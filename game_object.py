@@ -61,3 +61,32 @@ class GameObject():
             if go.id != -1:
                 go.draw_function(go)
 
+    def serialize(self) -> dict:
+        data: dict = {}
+        data["x"] = self.x
+        data["y"] = self.y
+        data["width"] = self.width
+        data["height"] = self.height
+        data["color"] = self.color
+        data["center"] = False if self.draw_function == GameObject.draw else True
+        return data
+    
+    @staticmethod
+    def serialize_all() -> dict:
+        data: dict = {}
+        index = 0
+        for go in GameObject.game_object_list:
+            if go.id != -1:
+                data[str(index)] = go.serialize()
+                index += 1
+        return data
+    
+    @staticmethod
+    def deserialize(data: dict):
+        GameObject(data["x"],data["y"],data["width"],data["height"],data["color"],data["center"])
+    
+    @staticmethod
+    def deserialize_all(data: dict):
+        for go in data:
+            GameObject.deserialize(data[go])
+            

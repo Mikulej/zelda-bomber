@@ -17,8 +17,12 @@ def main():
     GameObject.initialize()
 
     # Playable/walkable area
-    plane = GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
+    GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
     
+    player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
+
+    cursor = GameObject(0,0,20,20, (0,0,0,100))
+
     GameObject(100,100,50,50)
     GameObject(200,200,50,50,"blue")
 
@@ -32,10 +36,6 @@ def main():
     Collider(800,350,50,50,"yellow")
     Collider(800,400,50,50,"red")
     Collider(700,300,50,150,"purple")
-
-    player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
-
-    cursor = GameObject(0,0,20,20, (0,0,0,100))
 
     oldMousePressed = False
 
