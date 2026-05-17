@@ -91,3 +91,7 @@ class GameObject():
         for index in data:
             GameObject.deserialize(data[index])
             
+    @staticmethod
+    def destroy_all():
+        for go in GameObject.game_object_list:
+            go.id = -1

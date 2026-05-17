@@ -85,3 +85,7 @@ class Collider(GameObject):
       Collider.collider_id_list = []
       for index in data:
           Collider.collider_id_list.append(data[index])
+
+  @staticmethod
+  def destroy_all():
+      Collider.collider_id_list = []
