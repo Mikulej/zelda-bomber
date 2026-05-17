@@ -2,7 +2,7 @@ import pygame
 from game_object import GameObject
 from render import Renderer
 from collider import Collider
-
+from level import Level
 
 def main():
 
@@ -61,6 +61,12 @@ def main():
             cursor.x, cursor.y = int(mouse.x / Renderer.ratio.x / cursor.width) * cursor.width, int(mouse.y / Renderer.ratio.y / cursor.height) * cursor.height
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_r]:
+            Level.save("testSave")
+        if keys[pygame.K_t]:
+            Level.load("testSave")
+            player = GameObject.game_object_list[1]
+            cursor = GameObject.game_object_list[2]
         if keys[pygame.K_w]:
             _, player.y = Collider.move(player,0,-300 * dt)
         if keys[pygame.K_s]:
