@@ -12,7 +12,7 @@ class GameObject():
         self.width = width
         self.height = height
         self.id = -1
-        self.color = color
+        self.color = pygame.Color(color)
         self.draw_function = GameObject.draw
 
         if GameObject.initialized == False:
@@ -67,7 +67,7 @@ class GameObject():
         data["y"] = self.y
         data["width"] = self.width
         data["height"] = self.height
-        data["color"] = self.color
+        data["color"] = (self.color.r,self.color.g,self.color.b)
         data["center"] = False if self.draw_function == GameObject.draw else True
         data["id"] = self.id
         return data
