@@ -39,6 +39,9 @@ def main():
 
     oldMousePressed = False
     isPressing = False
+    startPositionMouse = 0
+    endPositionMouse = 0
+    cursorSelection = 0
 
     while running:
         # poll for events
@@ -87,16 +90,21 @@ def main():
 
         # OnClick
         if mousePressed == True and oldMousePressed == False:
-            GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
+            cursorSelection = GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
             isPressing = True
+            startPositionMouse = pygame.Vector2(cursor.x,cursor.y)
+            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
 
         # When Holding
         elif mousePressed == True:
-            pass
+            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
+            cursorSelection.width = endPositionMouse.x - startPositionMouse.x 
+            cursorSelection.height = endPositionMouse.y - startPositionMouse.y
 
         # OnClickRelease
         elif mousePressed == False and oldMousePressed == False and isPressing:
             isPressing = False
+            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
 
         oldMousePressed = mousePressed
 
