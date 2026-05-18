@@ -3,6 +3,7 @@ from game_object import GameObject
 from render import Renderer
 from collider import Collider
 from level import Level
+from cursor import Cursor
 
 def main():
 
@@ -21,7 +22,7 @@ def main():
     
     player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
 
-    cursor = GameObject(0,0,20,20, (0,0,0,100))
+    Cursor.Set(GameObject(0,0,20,20, (0,0,0,100)))
 
     GameObject(100,100,50,50)
     GameObject(200,200,50,50,"blue")
@@ -37,12 +38,6 @@ def main():
     Collider(800,400,50,50,"red")
     Collider(700,300,50,150,"purple")
 
-    oldMousePressed = False
-    isPressing = False
-    startPositionMouse = 0
-    endPositionMouse = 0
-    cursorSelection = 0
-
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
@@ -54,23 +49,17 @@ def main():
         # fill the screen with a color to wipe away anything from last frame
         Renderer.screen.fill("lightblue")
 
-        mouse = pygame.Vector2(pygame.mouse.get_pos())
-
         # ---- Render ----
 
         GameObject.draw_all()
         
-        # Render grid cursor
-        if mouse.x >= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x - (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) and mouse.x <= Renderer.BASE_RESOLUTION_X/2 * Renderer.ratio.x + (Renderer.BASE_RESOLUTION_Y*Renderer.ratio.x/2) - cursor.width * Renderer.ratio.x:
-            cursor.x, cursor.y = int(mouse.x / Renderer.ratio.x / cursor.width) * cursor.width, int(mouse.y / Renderer.ratio.y / cursor.height) * cursor.height
-
         keys = pygame.key.get_pressed()
         if keys[pygame.K_r]:
             Level.save("testSave")
         if keys[pygame.K_t]:
             Level.load("testSave")
             player = GameObject.game_object_list[1]
-            cursor = GameObject.game_object_list[2]
+            Cursor.Set(GameObject.game_object_list[2])
         if keys[pygame.K_w]:
             _, player.y = Collider.move(player,0,-300 * dt)
         if keys[pygame.K_s]:
@@ -86,27 +75,7 @@ def main():
         if keys[pygame.K_3]:
             Renderer.changeResolution(640,360)
 
-        mousePressed = pygame.mouse.get_pressed()[0]
-
-        # OnClick
-        if mousePressed == True and oldMousePressed == False:
-            cursorSelection = GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
-            isPressing = True
-            startPositionMouse = pygame.Vector2(cursor.x,cursor.y)
-            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
-
-        # When Holding
-        elif mousePressed == True:
-            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
-            cursorSelection.width = endPositionMouse.x - startPositionMouse.x 
-            cursorSelection.height = endPositionMouse.y - startPositionMouse.y
-
-        # OnClickRelease
-        elif mousePressed == False and oldMousePressed == False and isPressing:
-            isPressing = False
-            endPositionMouse = pygame.Vector2(cursor.x,cursor.y)
-
-        oldMousePressed = mousePressed
+        Cursor.Handle()
 
         # flip() the display to put your work on screen
         pygame.display.flip()
