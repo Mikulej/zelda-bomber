@@ -38,6 +38,7 @@ def main():
     Collider(700,300,50,150,"purple")
 
     oldMousePressed = False
+    isPressing = False
 
     while running:
         # poll for events
@@ -83,8 +84,20 @@ def main():
             Renderer.changeResolution(640,360)
 
         mousePressed = pygame.mouse.get_pressed()[0]
+
+        # OnClick
         if mousePressed == True and oldMousePressed == False:
             GameObject(cursor.x,cursor.y,cursor.width,cursor.height,pygame.Color(122,25,21))
+            isPressing = True
+
+        # When Holding
+        elif mousePressed == True:
+            pass
+
+        # OnClickRelease
+        elif mousePressed == False and oldMousePressed == False and isPressing:
+            isPressing = False
+
         oldMousePressed = mousePressed
 
         # flip() the display to put your work on screen
