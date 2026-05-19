@@ -67,3 +67,25 @@ class Collider(GameObject):
             next_pos_y = collider.y - go.height
         
       return next_pos_x,next_pos_y
+  
+  @staticmethod
+  def serialize_all(gameObjectData: dict) -> dict:
+      data: dict = {}
+      index = 0
+      for id in Collider.collider_id_list:
+          for go_index in gameObjectData:
+             if gameObjectData[go_index]["id"] == id:
+                data[str(index)] = int(go_index)
+                break
+          index += 1
+      return data
+  
+  @staticmethod
+  def deserialize_all(data: dict):
+      Collider.collider_id_list = []
+      for index in data:
+          Collider.collider_id_list.append(data[index])
+
+  @staticmethod
+  def destroy_all():
+      Collider.collider_id_list = []
