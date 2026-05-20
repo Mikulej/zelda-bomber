@@ -4,18 +4,52 @@ from game_object import GameObject
 
 
 class Collider(GameObject):
-  collider_id_list = [] 
+  """
+  A collider that restricts movement for any GameObject that moves using 'move' function.
+
+  Inherits from GameObject.
+
+  Attributes:
+      collider_id_list (list): List of GameObject ids that have a Collider attached to them
+  """
+  collider_id_list: list = [] 
   
   def __init__(self, x: float, y: float, width: float, height: float, color: pygame.Color = (255,255,255), center: bool = False):
+    """
+    Create a new Collider.
+
+    Parameters:
+        x (float): X position of rectangle.
+        y (float): Y position of rectangle.
+        width (float): Width of rectangle.
+        height (float): Height of rectangle.
+        color (pygame.Color): Color of rectangle.
+        center (bool): If True x, y will denote center of a rectangle otherwise they denote upper-left corner.
+    """
     super().__init__(x, y, width, height, color)
     Collider.collider_id_list.append(self.id)
 
   def __del__(self):
+    """
+    Delete a Collider.
+    
+    Removes id of corresponding GameObject from collider_id_list
+    """
     super().__del__()
     Collider.collider_id_list.remove(self.id)
 
   @staticmethod
   def move(go: GameObject,dx: float, dy: float) -> tuple[float, float]:
+      """
+      Moves provided GameObject with respect to existing Colliders.
+
+      Parameters:
+          go (GameObject): GameObject to be moved.
+          dx (float): Movement done by GameObject in 1 frame in X axis.
+          dy (float): Movement done by GameObject in 1 frame in Y axis.
+      Returns:
+        tuple: x, y position of an GameObject in next frame.
+      """
       skip_id = go.id
       next_pos_x = go.x + dx
       next_pos_y = go.y + dy
@@ -70,6 +104,12 @@ class Collider(GameObject):
   
   @staticmethod
   def serialize_all(gameObjectData: dict) -> dict:
+      """
+      Serialize all Colliders to dict.
+
+      Returns:
+          dict: Serialized Colliders
+      """
       data: dict = {}
       index = 0
       for id in Collider.collider_id_list:
@@ -82,10 +122,16 @@ class Collider(GameObject):
   
   @staticmethod
   def deserialize_all(data: dict):
+      """
+      Deserialize all Colliders from dict.
+      """
       Collider.collider_id_list = []
       for index in data:
           Collider.collider_id_list.append(data[index])
 
   @staticmethod
   def destroy_all():
+      """
+      Destroy all Colliders, set collider_id_list to an empty list.
+      """
       Collider.collider_id_list = []
