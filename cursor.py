@@ -3,19 +3,39 @@ from render import Renderer
 import pygame
 
 class Cursor:
+    """
+    Represents a cursor, that is used for level editor. Handles mouse input.
+
+    Attributes:
+        cursor (GameObject): GameObject representing a cursor
+        oldMousePressed (tuple): Stores boolean values whether corresponding mouse key was pressed in previous frame
+        isPressingLeft (bool): Flag for whether the left mouse button is being pressed in current frame
+        startPositionMouse (pygame.Vector2): Start position of an selection
+        endPositionMouse (pygame.Vector2): End position of an selection
+        cursorSelection (GameObject): GameObject representing a selection
+    """
     cursor: GameObject
     oldMousePressed: tuple = (False,False)
-    isPressingLeft: tuple = (False, False)
+    isPressingLeft: bool = False
     startPositionMouse: pygame.Vector2
     endPositionMouse: pygame.Vector2
     cursorSelection: GameObject
 
     @staticmethod
     def Set(cursorGameObject: GameObject):
+        """
+        Sets a new GameObject representing a cursor
+
+        Parameters:
+            cursorGameObject (GameObject):
+        """
         Cursor.cursor = cursorGameObject
 
     @staticmethod
     def Handle():
+        """
+        Handles mouse input and cursor behaviour - grid snapping and selection.
+        """
 
         mousePos = pygame.Vector2(pygame.mouse.get_pos())
         leftPressed, _, rightPressed = pygame.mouse.get_pressed()
