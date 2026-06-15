@@ -4,6 +4,7 @@ from render import Renderer
 from collider import Collider
 from level import Level
 from cursor import Cursor
+from player import Player
 
 def main():
 
@@ -20,8 +21,8 @@ def main():
     # Playable/walkable area
     GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
     
-    player = GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red")
 
+    Player.Set(GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red"))
     Cursor.Set(GameObject(0,0,20,20, (0,0,0,100)))
 
     GameObject(100,100,50,50)
@@ -58,16 +59,11 @@ def main():
             Level.save("testSave")
         if keys[pygame.K_t]:
             Level.load("testSave")
-            player = GameObject.game_object_list[1]
+            Player.Set(GameObject.game_object_list[1])
             Cursor.Set(GameObject.game_object_list[2])
-        if keys[pygame.K_w]:
-            _, player.y = Collider.move(player,0,-300 * dt)
-        if keys[pygame.K_s]:
-            _, player.y = Collider.move(player,0,300 * dt)
-        if keys[pygame.K_a]:
-            player.x, _ = Collider.move(player,-300 * dt,0)
-        if keys[pygame.K_d]:
-            player.x, _ = Collider.move(player,300 * dt,0)
+
+        Player.Handle(dt)
+
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
         if keys[pygame.K_2]:
