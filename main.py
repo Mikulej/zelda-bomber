@@ -63,7 +63,7 @@ def main():
             Level.save("testSave")
         if keys[pygame.K_t]:
             Level.load("testSave")
-            Player.Set(GameObject.game_object_list[1])
+            Player.Set(GameObject.game_object_list[1], ennemy_list)
             Cursor.Set(GameObject.game_object_list[2])
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
