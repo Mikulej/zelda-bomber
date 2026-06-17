@@ -1,4 +1,5 @@
 from game_object import GameObject
+from collider import Collider
 from render import Renderer
 import pygame
 
@@ -46,7 +47,7 @@ class Cursor:
         
         # OnClick
         if leftPressed and not Cursor.oldMousePressed[0]:
-            Cursor.cursorSelection = GameObject(Cursor.cursor.x,Cursor.cursor.y,Cursor.cursor.width,Cursor.cursor.height,pygame.Color(122,25,21))
+            Cursor.cursorSelection = Collider(Cursor.cursor.x,Cursor.cursor.y,Cursor.cursor.width,Cursor.cursor.height,pygame.Color(122,25,21))
             Cursor.isPressingLeft = True
             Cursor.startPositionMouse = pygame.Vector2(Cursor.cursor.x,Cursor.cursor.y)
             Cursor.endPositionMouse = pygame.Vector2(Cursor.cursor.x,Cursor.cursor.y)
