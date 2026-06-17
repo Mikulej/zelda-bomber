@@ -5,6 +5,7 @@ from collider import Collider
 from level import Level
 from cursor import Cursor
 from player import Player
+from ennemy import Ennemy
 
 def main():
 
@@ -21,9 +22,11 @@ def main():
     # Playable/walkable area
     GameObject(Renderer.BASE_RESOLUTION_X / 2,Renderer.BASE_RESOLUTION_Y / 2,Renderer.BASE_RESOLUTION_Y,Renderer.BASE_RESOLUTION_Y,(255, 197, 104),True)
     
+    ennemy_list: list[Ennemy] = []
 
-    Player.Set(GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red"))
+    Player.Set(GameObject(Renderer.screen.get_width() / 2 / Renderer.ratio.x, Renderer.screen.get_height() / 2 / Renderer.ratio.y,20,20,"red"), ennemy_list)
     Cursor.Set(GameObject(0,0,20,20, (0,0,0,100)))
+
 
     GameObject(100,100,50,50)
     GameObject(200,200,50,50,"blue")
@@ -36,8 +39,9 @@ def main():
     Collider(800,200,50,50,"brown")
     Collider(800,300,50,50,"green")
     Collider(800,350,50,50,"yellow")
-    Collider(800,400,50,50,"red")
+    ennemy_list.append(Ennemy(800,400,50,50,"purple"))
     Collider(700,300,50,150,"purple")
+
 
     while running:
         # poll for events
@@ -61,9 +65,6 @@ def main():
             Level.load("testSave")
             Player.Set(GameObject.game_object_list[1])
             Cursor.Set(GameObject.game_object_list[2])
-
-        Player.Handle(dt)
-
         if keys[pygame.K_1]:
             Renderer.changeResolution(1920,1080)
         if keys[pygame.K_2]:
@@ -72,6 +73,8 @@ def main():
             Renderer.changeResolution(640,360)
 
         Cursor.Handle()
+        Player.Handle(dt, ennemy_list)
+        
 
         # flip() the display to put your work on screen
         pygame.display.flip()
