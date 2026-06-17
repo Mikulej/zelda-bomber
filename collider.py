@@ -36,7 +36,8 @@ class Collider(GameObject):
     Removes id of corresponding GameObject from collider_id_list
     """
     super().__del__()
-    Collider.collider_id_list.remove(self.id)
+    if self.id in Collider.collider_id_list:
+      Collider.collider_id_list.remove(self.id)
 
   @staticmethod
   def move(go: GameObject,dx: float, dy: float) -> tuple[float, float]:
