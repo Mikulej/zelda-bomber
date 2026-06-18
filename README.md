@@ -1,6 +1,7 @@
+
 # Zelda Bomber
 
-![Demo video](demo.mp4)
+https://github.com/user-attachments/assets/b4a56968-b34f-4f34-9d77-e3f59d7f476f
 
 ## Requirements
 
