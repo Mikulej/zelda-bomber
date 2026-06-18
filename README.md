@@ -1,5 +1,7 @@
 # Zelda Bomber
 
+![Demo video](demo.mp4)
+
 ## Requirements
 
 - Python 3.14.5  
